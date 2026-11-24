@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#05070d">
+  <title>MechaStick Fighter — JS Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game">
+    <canvas id="canvas"></canvas>
+
+    <div id="hud">
+      <div class="player p1">
+        <div class="row">
+          <span class="name">P1 · IRON WOLF</span>
+          <span class="pips" id="pips1"></span>
+        </div>
+        <div class="bar"><div class="fill" id="hp1"></div></div>
+      </div>
+
+      <div class="round-badge hidden" id="roundBadge">ROUND 1 / 3</div>
+
+      <div class="player p2">
+        <div class="row">
+          <span class="pips" id="pips2"></span>
+          <span class="name">CRIMSON FANG · P2</span>
+        </div>
+        <div class="bar"><div class="fill" id="hp2"></div></div>
+      </div>
+    </div>
+
+    <div id="banner"></div>
+
+    <div id="controls" class="hidden">
+      <span><b>P1:</b> A/D — ходьба · W — прыжок · F — удар · G — пинок</span>
+      <span><b>P2:</b> ←/→ — ходьба · ↑ — прыжок · K — удар · L — пинок · Esc — меню</span>
+    </div>
+
+    <!-- ================= МЕНЮ ================= -->
+    <div id="menu" class="overlay">
+      <div class="menu-inner">
+        <h1 class="title">MECHA<span>STICK</span><br>FIGHTER</h1>
+        <p class="subtitle">Best of 3 · Local 2-Player Robot Combat</p>
+
+        <div class="map-label">SELECT ARENA</div>
+        <div class="map-select" id="mapSelect"></div>
+
+        <button id="playBtn" class="menu-btn primary big">▶ PLAY</button>
+
+        <div class="controls-panel">
+          <div class="ctrl-block p1">
+            <h3>IRON WOLF · P1</h3>
+            <div class="ctrl-grid">
+              <span class="key">A</span><span class="key">D</span><span class="action">Move</span>
+              <span class="key">W</span><span></span>         <span class="action">Jump</span>
+              <span class="key">F</span><span></span>         <span class="action">Punch</span>
+              <span class="key">G</span><span></span>         <span class="action">Kick</span>
+            </div>
+          </div>
+          <div class="ctrl-block p2">
+            <h3>CRIMSON FANG · P2</h3>
+            <div class="ctrl-grid">
+              <span class="key">←</span><span class="key">→</span><span class="action">Move</span>
+              <span class="key">↑</span><span></span>         <span class="action">Jump</span>
+              <span class="key">K</span><span></span>         <span class="action">Punch</span>
+              <span class="key">L</span><span></span>         <span class="action">Kick</span>
+            </div>
+          </div>
+        </div>
+        <p class="hint"><b>PC:</b> клавиатура · <b>Mobile:</b> экранные кнопки. <b>Esc</b> — меню.</p>
+      </div>
+    </div>
+
+    <!-- ================= КОНЕЦ МАТЧА ================= -->
+    <div id="matchEnd" class="overlay hidden">
+      <div class="menu-inner">
+        <p class="winner-label">WINNER</p>
+        <h1 class="winner-name" id="winnerName">IRON WOLF</h1>
+        <p class="final-score" id="finalScore">2 — 0</p>
+        <div class="button-row">
+          <button id="rematchBtn" class="menu-btn primary">REMATCH</button>
+          <button id="menuBtn" class="menu-btn">MAIN MENU</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= СЕНСОРНЫЕ КНОПКИ (fixed, поверх всего) ================= -->
+  <div id="touchControls" class="touch-controls hidden">
+    <div class="tc-panel tc-p1">
+      <button class="tc-btn tc-up"    data-code="KeyW">▲</button>
+      <button class="tc-btn tc-punch" data-code="KeyF">👊</button>
+      <button class="tc-btn tc-left"  data-code="KeyA">◀</button>
+      <button class="tc-btn tc-right" data-code="KeyD">▶</button>
+      <button class="tc-btn tc-kick"  data-code="KeyG">🦵</button>
+    </div>
+
+    <div class="tc-panel tc-p2">
+      <button class="tc-btn tc-punch" data-code="KeyK">👊</button>
+      <button class="tc-btn tc-up"    data-code="ArrowUp">▲</button>
+      <button class="tc-btn tc-kick"  data-code="KeyL">🦵</button>
+      <button class="tc-btn tc-left"  data-code="ArrowLeft">◀</button>
+      <button class="tc-btn tc-right" data-code="ArrowRight">▶</button>
+    </div>
+  </div>
+
+  <script src="game.js?v=6"></script>
+</body>
+</html>
